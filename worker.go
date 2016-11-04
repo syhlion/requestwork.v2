@@ -61,9 +61,6 @@ func (w *Worker) Execute(ctx context.Context, req *http.Request, h func(resp *ht
 	return <-j.end
 
 }
-func (w *Worker) ReleaseIdleConnections() {
-	w.tr.CloseIdleConnections()
-}
 
 func (w *Worker) run() {
 	for j := range w.jobQuene {

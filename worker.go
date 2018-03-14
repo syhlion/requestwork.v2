@@ -4,6 +4,7 @@ import (
 	"context"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type job struct {
@@ -32,6 +33,7 @@ func New(threads int) *Worker {
 	}
 	client := &http.Client{
 		Transport: tr,
+		Timeout:   time.Second * 60,
 	}
 	w := &Worker{
 		jobQuene: make(chan *job),

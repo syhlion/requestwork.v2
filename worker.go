@@ -28,7 +28,6 @@ func New(threads int) *Worker {
 
 	tr := &http.Transport{
 		Proxy:               NoProxyAllowed,
-		Dial:                Dial,
 		MaxIdleConnsPerHost: threads * DefaultMaxIdleConnPerHost,
 	}
 	client := &http.Client{

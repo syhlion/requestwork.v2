@@ -7,3 +7,20 @@ steps:
   commands:
   - go test
 
+- name: notify
+  image: appleboy/drone-telegram
+  settings:
+    message: >
+        {{#success build.status}}
+            build {{build.number}} succeeded. Good job.
+            {{else}}
+            build {{build.number}} failed. Fix me please.
+        {{/success}}
+    token: 
+        from_secret: bot_token
+    to: 
+        from_secret: bot_to
+  when:
+    status:
+    - failure
+    - success

@@ -12,7 +12,7 @@ steps:
   settings:
     message: >
         {{#success build.status}}
-            {{repo}} build {{build.number} commit {{commit.sha}}} succeeded. Good job.
+            {{repo}} build {{build.number} commit {{commit.sha}} succeeded. Good job.
             {{else}}
             {{repo}} build {{build.number}} commit {{commit.sha}} failed. Fix me please.
         {{/success}}

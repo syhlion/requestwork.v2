@@ -14,8 +14,9 @@ func TestExecute(t *testing.T) {
 	}
 	a := New(5)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	req.WithContext(ctx)
 	defer cancel()
-	err = a.Execute(ctx, req, func(resp *http.Response, err error) error {
+	err = a.Execute(req, func(resp *http.Response, err error) error {
 
 		if err != nil {
 			return err
@@ -28,7 +29,7 @@ func TestExecute(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	err = a.Execute(context.Background(), req, func(resp *http.Response, err error) error {
+	err = a.Execute(req, func(resp *http.Response, err error) error {
 
 		if err != nil {
 			return err

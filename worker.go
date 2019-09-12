@@ -28,13 +28,13 @@ func New(threads int) *Worker {
 	tr := &http.Transport{
 		Proxy: NoProxyAllowed,
 		Dial: (&net.Dialer{
-			Timeout:   30 * time.Second,
-			KeepAlive: 30 * time.Second,
+			Timeout:   60 * time.Second,
+			KeepAlive: 60 * time.Second,
 		}).Dial,
 		MaxIdleConnsPerHost:   threads,
-		IdleConnTimeout:       30 * time.Second,
-		TLSHandshakeTimeout:   10 * time.Second,
-		ResponseHeaderTimeout: 10 * time.Second,
+		IdleConnTimeout:       180 * time.Second,
+		TLSHandshakeTimeout:   60 * time.Second,
+		ResponseHeaderTimeout: 60 * time.Second,
 		MaxIdleConns:          threads,
 	}
 	client := &http.Client{

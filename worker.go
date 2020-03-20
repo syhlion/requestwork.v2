@@ -64,6 +64,10 @@ type Worker struct {
 	client   *http.Client
 }
 
+func (w *Worker) CheckRedirect(f func(req *http.Request, via []*http.Request) error) {
+	w.client.CheckRedirect = f
+}
+
 //Execute exec http request
 func (w *Worker) Execute(req *http.Request, h func(resp *http.Response, err error) error) (err error) {
 

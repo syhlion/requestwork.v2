@@ -31,11 +31,10 @@ func New(threads int) *Worker {
 			Timeout:   60 * time.Second,
 			KeepAlive: 60 * time.Second,
 		}).Dial,
-		MaxIdleConnsPerHost:   threads,
+		DisableKeepAlives:     true,
 		IdleConnTimeout:       180 * time.Second,
 		TLSHandshakeTimeout:   60 * time.Second,
 		ResponseHeaderTimeout: 60 * time.Second,
-		MaxIdleConns:          threads,
 	}
 	client := &http.Client{
 		Transport: tr,

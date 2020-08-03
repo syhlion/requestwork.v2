@@ -32,7 +32,7 @@ func New(threads int) *Worker {
 			KeepAlive: 60 * time.Second,
 		}).Dial,
 		DisableKeepAlives:     true,
-		IdleConnTimeout:       180 * time.Second,
+		IdleConnTimeout:       30 * time.Second,
 		TLSHandshakeTimeout:   60 * time.Second,
 		ResponseHeaderTimeout: 60 * time.Second,
 	}

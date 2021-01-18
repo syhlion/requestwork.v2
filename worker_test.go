@@ -12,7 +12,7 @@ func TestExecute(t *testing.T) {
 	if err != nil {
 		t.Error("request error: ", err)
 	}
-	a := New(5)
+	a := New(5, nil)
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	req.WithContext(ctx)
 	defer cancel()

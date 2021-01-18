@@ -23,19 +23,21 @@ type result struct {
 const DefaultMaxIdleConnPerHost = 20
 
 //New return http worker
-func New(threads int) *Worker {
-
-	tr := &http.Transport{
-		Proxy: NoProxyAllowed,
-		Dial: (&net.Dialer{
-			Timeout:   60 * time.Second,
-			KeepAlive: 60 * time.Second,
-		}).Dial,
-		DisableKeepAlives:     true,
-		IdleConnTimeout:       30 * time.Second,
-		TLSHandshakeTimeout:   60 * time.Second,
-		ResponseHeaderTimeout: 60 * time.Second,
+func New(threads int, tr *http.Transport) *Worker {
+	if tr == nil {
+		tr = &http.Transport{
+			Proxy: NoProxyAllowed,
+			Dial: (&net.Dialer{
+				Timeout:   60 * time.Second,
+				KeepAlive: 60 * time.Second,
+			}).Dial,
+			DisableKeepAlives:     true,
+			IdleConnTimeout:       30 * time.Second,
+			TLSHandshakeTimeout:   60 * time.Second,
+			ResponseHeaderTimeout: 60 * time.Second,
+		}
 	}
+
 	client := &http.Client{
 		Transport: tr,
 		Timeout:   time.Second * 120,

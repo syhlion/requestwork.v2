@@ -84,7 +84,7 @@ func (w *Worker) run() {
 	for j := range w.jobQuene {
 		c := make(chan error, 1)
 		go func() {
-			c <- j.handler(w.client.Transport.RoundTrip(j.req))
+			c <- j.handler(w.client.Do(j.req))
 		}()
 		select {
 		case <-j.req.Context().Done():
